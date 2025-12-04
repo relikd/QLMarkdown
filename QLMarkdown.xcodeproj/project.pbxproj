@@ -62,6 +62,7 @@
 		54C508BA2EE0D40A00E5C1A3 /* Preview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Preview.entitlements; sourceTree = "<group>"; };
 		54C508DA2EE0ED4200E5C1A3 /* empty.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty.txt; sourceTree = "<group>"; };
 		54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		54C509042EE1DA3400E5C1A3 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 				5496881C2EE0AB4E00FB282A /* Config.xcconfig */,
 				5496881D2EE0AB4E00FB282A /* Config-debug.xcconfig */,
 				549688392EE0AFC500FB282A /* README.md */,
+				54C509042EE1DA3400E5C1A3 /* CHANGELOG.md */,
 				54C509012EE1C16D00E5C1A3 /* resources */,
 				5496883E2EE0B0B700FB282A /* App */,
 				549688462EE0B0BA00FB282A /* QLPreview */,

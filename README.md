@@ -40,9 +40,10 @@ If you want customizations, you can write your own css file.
 ### How to customize CSS
 
 1. Right click on the app and select "Show Package Contents"
-2. Copy `Contents/Resources/style.css` (or `markdown.css`)
-3. Open `~/Library/Containers/de.relikd.QLMarkdown.Preview/Data/Documents/`
-4. Paste the previous file and modify it to your liking
+2. Go to `PlugIns` and repeat "Show Package Contents" on the Preview extension.
+3. Copy `Contents/Resources/style.css` (or `markdown.css`)
+4. Open `~/Library/Containers/de.relikd.QLMarkdown.Preview/Data/Documents/`
+5. Paste the previous file and modify it to your liking
 
 
 ## Privacy & Security

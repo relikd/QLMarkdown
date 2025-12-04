@@ -1,7 +1,3 @@
-/* manually added: */
-body { padding: 20px 40px 10px; }
-footer { font-size: 0.6em; color: #777; margin: 50px 0 0; text-align: center; }
-
 /* Copied from https://github.com/sindresorhus/github-markdown-css (2025-12-04) */
 .markdown-body {
   --base-size-4: 0.25rem;

@@ -27,7 +27,7 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 	}
 	
 	/// Load resource file either from user documents dir (if exists) or app bundle (default).
-	func bundleFile(filename: String, ext: String) throws -> URL {
+	func bundleFile(filename: String, ext: String) -> URL {
 		if let userFile = URL.UserModDir?.appendingPathComponent(filename + "." + ext, isDirectory: false), userFile.exists() {
 			return userFile
 		}
@@ -35,7 +35,6 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 	}
 	
 	func preparePreviewOfFile(at url: URL) async throws {
-		let cssUrl = try bundleFile(filename: "markdown", ext: "css")
 		let md = try Document(parsing: url)
 		
 		let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
@@ -47,7 +46,8 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="\(cssUrl)" />
+<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "markdown", ext: "css"))" />
+<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "style", ext: "css"))" />
 </head>
 <body class="markdown-body">
 \(HTMLFormatter.format(md))

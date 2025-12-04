@@ -40,7 +40,7 @@ If you want customizations, you can write your own css file.
 ### How to customize CSS
 
 1. Right click on the app and select "Show Package Contents"
-2. Copy `Contents/Resources/style.css`
+2. Copy `Contents/Resources/style.css` (or `markdown.css`)
 3. Open `~/Library/Containers/de.relikd.QLMarkdown.Preview/Data/Documents/`
 4. Paste the previous file and modify it to your liking
 

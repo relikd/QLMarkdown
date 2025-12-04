@@ -13,6 +13,7 @@
 		549688412EE0B0B700FB282A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5496883A2EE0B0B700FB282A /* AppDelegate.swift */; };
 		549688482EE0B0BA00FB282A /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549688452EE0B0BA00FB282A /* PreviewViewController.xib */; };
 		549688492EE0B0BA00FB282A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549688432EE0B0BA00FB282A /* PreviewViewController.swift */; };
+		5496C6CD2EE1FE7100EE9345 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 5496C6CC2EE1FE6E00EE9345 /* style.css */; };
 		54AD6C9B2EE0BC45006CCA14 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 54AD6C9A2EE0BC45006CCA14 /* Markdown */; };
 		54AD6C9D2EE0C2B1006CCA14 /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = 54AD6C9C2EE0C2B1006CCA14 /* markdown.css */; };
 		54C508DB2EE0ED4600E5C1A3 /* empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 54C508DA2EE0ED4200E5C1A3 /* empty.txt */; };
@@ -56,6 +57,7 @@
 		549688432EE0B0BA00FB282A /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		549688442EE0B0BA00FB282A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreviewViewController.xib; sourceTree = "<group>"; };
 		5496884A2EE0B12D00FB282A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5496C6CC2EE1FE6E00EE9345 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		54AD6C9C2EE0C2B1006CCA14 /* markdown.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = markdown.css; sourceTree = "<group>"; };
 		54C508BA2EE0D40A00E5C1A3 /* Preview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Preview.entitlements; sourceTree = "<group>"; };
 		54C508DA2EE0ED4200E5C1A3 /* empty.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty.txt; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */,
 				54AD6C9C2EE0C2B1006CCA14 /* markdown.css */,
+				5496C6CC2EE1FE6E00EE9345 /* style.css */,
 				54C508DA2EE0ED4200E5C1A3 /* empty.txt */,
 			);
 			path = resources;
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				549688482EE0B0BA00FB282A /* PreviewViewController.xib in Resources */,
+				5496C6CD2EE1FE7100EE9345 /* style.css in Resources */,
 				54AD6C9D2EE0C2B1006CCA14 /* markdown.css in Resources */,
 				54C508DB2EE0ED4600E5C1A3 /* empty.txt in Resources */,
 			);

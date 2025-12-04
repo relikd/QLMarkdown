@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5496881E2EE0AB4E00FB282A /* Config-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5496881D2EE0AB4E00FB282A /* Config-debug.xcconfig */; };
-		5496881F2EE0AB4E00FB282A /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5496881C2EE0AB4E00FB282A /* Config.xcconfig */; };
 		549688272EE0AD8200FB282A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549688262EE0AD8200FB282A /* Quartz.framework */; };
 		549688332EE0AD8200FB282A /* QLMarkdown Preview Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 549688242EE0AD8200FB282A /* QLMarkdown Preview Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		549688402EE0B0B700FB282A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5496883D2EE0B0B700FB282A /* MainMenu.xib */; };
@@ -240,8 +238,6 @@
 			files = (
 				54C509022EE1C19500E5C1A3 /* AppIcon.icns in Resources */,
 				549688402EE0B0B700FB282A /* MainMenu.xib in Resources */,
-				5496881E2EE0AB4E00FB282A /* Config-debug.xcconfig in Resources */,
-				5496881F2EE0AB4E00FB282A /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

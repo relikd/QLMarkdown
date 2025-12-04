@@ -37,6 +37,10 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 	func preparePreviewOfFile(at url: URL) async throws {
 		let cssUrl = try bundleFile(filename: "markdown", ext: "css")
 		let md = try Document(parsing: url)
+		
+		let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+		let buildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+		
 		self.url = url
 		self.html = """
 <!DOCTYPE html>
@@ -47,6 +51,10 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 </head>
 <body class="markdown-body">
 \(HTMLFormatter.format(md))
+
+<footer>
+QLMarkdown v\(ver) (\(buildVer)) (Github: <a href="https://github.com/relikd/QLMarkdown">relikd/QLMarkdown</a>)
+</footer>
 </body>
 </html>
 """

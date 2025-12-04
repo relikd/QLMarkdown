@@ -5,8 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project does adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.9.1] – 2025-12-04
+Added:
+- Plugin version in preview footer
+- Separate `style.css` to make overwrites easier
+
+
 ## [0.9.0] – 2025-12-04
 Initial release
 
 
+[0.9.1]: https://github.com/relikd/QLMarkdown/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/relikd/QLMarkdown/compare/f8545f5c77ec74030ea556833ff4b51cdfb75bce...v0.9.0

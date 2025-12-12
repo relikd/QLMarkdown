@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project does adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.9.2] – 2025-12-12
+Changed:
+- Remove github link from preview footer. Too distracting / too prominent. A version note should be discreet and not get in the way.
+
+
 ## [0.9.1] – 2025-12-04
 Added:
 - Plugin version in preview footer
@@ -15,5 +20,6 @@ Added:
 Initial release
 
 
+[0.9.2]: https://github.com/relikd/QLMarkdown/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/relikd/QLMarkdown/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/relikd/QLMarkdown/compare/f8545f5c77ec74030ea556833ff4b51cdfb75bce...v0.9.0

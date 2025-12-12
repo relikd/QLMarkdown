@@ -53,7 +53,7 @@ class PreviewViewController: NSViewController, QLPreviewingController, WKNavigat
 \(HTMLFormatter.format(md))
 
 <footer>
-QLMarkdown v\(ver) (\(buildVer)) (Github: <a href="https://github.com/relikd/QLMarkdown">relikd/QLMarkdown</a>)
+relikd/QLMarkdown v\(ver) (\(buildVer))
 </footer>
 </body>
 </html>

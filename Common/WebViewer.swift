@@ -56,15 +56,18 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		}
 	}
 	
+	/// Read source file and load in web browser
 	func reload(scrollTo: Int = 0) throws {
 		guard let url else {
 			return
 		}
 		let md = try Markdown.Document(parsing: url)
-		let html = _html(md, footer: _footer(), scrollTo: scrollTo)
-		// write debug output
-		//try? html!.write(to: URL.UserModDir!.appendingPathComponent("debug.html", isDirectory: false), atomically: true, encoding: .utf8)
-		web.loadHTMLString(html, baseURL: url)
+		web.loadHTMLString(_html(md, footer: _footer(), scrollTo: scrollTo), baseURL: url)
+	}
+	
+	/// Read source file and generate new Markdown html document for export (without footer).
+	func rawHtml() throws -> String {
+		_html(try Markdown.Document(parsing: url ?? scapegoat))
 	}
 	
 	// this should open links in external browser but it doesnt

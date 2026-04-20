@@ -107,6 +107,11 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Save as HTML" keyEquivalent="s" id="mSU-bA-YDE">
+                                <connections>
+                                    <action selector="saveAsHtml:" target="-1" id="YpZ-6h-unZ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>

@@ -85,5 +85,16 @@ class Document: NSDocument, NSWindowDelegate {
 	@IBAction func reloadDocument(_ sender: NSMenuItem) {
 		self.web.reloadKeepScrollPosition()
 	}
+	
+	@IBAction func saveAsHtml(_ sender: NSMenuItem) {
+		let filename = fileURL?.deletingPathExtension().lastPathComponent ?? "markdown"
+		let panel = NSSavePanel()
+		panel.canCreateDirectories = true
+		panel.nameFieldStringValue = filename + ".html"
+		guard panel.runModal() == .OK, let url = panel.url else {
+			return
+		}
+		try? web.rawHtml().write(to: url, atomically: true, encoding: .utf8)
+	}
 }
 

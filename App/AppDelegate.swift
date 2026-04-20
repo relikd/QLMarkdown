@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 			}
 			if menu.items.count == 2 { // populate once
 				let me = Bundle.main.bundleURL
-				let apps = appURLs().filter { $0 != me }//.sorted { $0.lastPathComponent < $1.lastPathComponent }
+				let apps = appURLs().filter { $0 != me }.sorted { $0.lastPathComponent.localizedLowercase < $1.lastPathComponent.localizedLowercase }
 				for appUrl in apps {
 					let item = menu.addItem(withTitle: String(appUrl.lastPathComponent.dropLast(4)), action: #selector(Document.openInEditor), keyEquivalent: "")
 					item.representedObject = appUrl

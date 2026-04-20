@@ -86,14 +86,15 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 	}
 	
 	// this should open links in external browser but it doesnt
-//	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void) {
-//		if navigationAction.navigationType == .linkActivated,
-//		   let url = navigationAction.request.url {
+	func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void) {
+		if UserDefaults.standard.bool(forKey: "openLinksInBrowser"),
+		   navigationAction.navigationType == .linkActivated,
+		   let url = navigationAction.request.url {
 //			os_log(.debug, log: log, "open url %{public}@", String(describing: url))
-//			NSWorkspace.shared.open(url)
-//			decisionHandler(.cancel)
-//		} else {
-//			decisionHandler(.allow)
-//		}
-//	}
+			NSWorkspace.shared.open(url)
+			decisionHandler(.cancel)
+		} else {
+			decisionHandler(.allow)
+		}
+	}
 }

@@ -2,8 +2,6 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
-	@IBOutlet var window: NSWindow!
-	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
 	}
@@ -35,7 +33,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 					item.representedObject = appUrl
 				}
 			}
-			break
 		default: break
 		}
 	}

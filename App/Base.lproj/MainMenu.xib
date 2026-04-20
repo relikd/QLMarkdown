@@ -233,6 +233,39 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Settings" id="x1L-e3-iOv">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Settings" id="0bx-RP-f2h">
+                        <items>
+                            <menuItem title="Open Links in" id="fsq-t6-Lc1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open Links in" id="zQf-6A-9zZ">
+                                    <items>
+                                        <menuItem title="Internal Preview" id="dbc-76-ML0">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <binding destination="K5g-Af-dVt" name="value" keyPath="values.openLinksInBrowser" id="auj-Uo-Ivk">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="External Browser" tag="103" id="20r-wM-TkP">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <binding destination="K5g-Af-dVt" name="value" keyPath="values.openLinksInBrowser" id="K4o-1t-g5n"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                    <connections>
+                                        <outlet property="delegate" destination="Voe-Tx-rLC" id="mGe-y7-63Y"/>
+                                    </connections>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Help" id="wpr-3q-Mcd">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ"/>

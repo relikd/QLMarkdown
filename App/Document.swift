@@ -81,5 +81,9 @@ class Document: NSDocument, NSWindowDelegate {
 		}
 		NSWorkspace.shared.open([fileURL!], withApplicationAt: appURL, configuration: NSWorkspace.OpenConfiguration())
 	}
+	
+	@IBAction func reloadDocument(_ sender: NSMenuItem) {
+		self.web.reloadKeepScrollPosition()
+	}
 }
 

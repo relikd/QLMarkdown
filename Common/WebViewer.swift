@@ -61,25 +61,7 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 			return
 		}
 		let md = try Markdown.Document(parsing: url)
-		
-		let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-		let buildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-		
-		let html = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "markdown", ext: "css"))" />
-<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "style", ext: "css"))" />
-</head>
-<body class="markdown-body">
-\(HTMLFormatter.format(md))
-<footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>
-</body>
-<script>scrollTo(0,\(scrollTo))</script>
-</html>
-"""
+		let html = _html(md, footer: _footer(), scrollTo: scrollTo)
 		// write debug output
 		//try? html!.write(to: URL.UserModDir!.appendingPathComponent("debug.html", isDirectory: false), atomically: true, encoding: .utf8)
 		web.loadHTMLString(html, baseURL: url)
@@ -96,5 +78,31 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		} else {
 			decisionHandler(.allow)
 		}
+	}
+	
+	// MARK: - Content
+	
+	private func _html(_ body: Markdown.Document, footer: String = "", scrollTo: Int = 0) -> String {
+		"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "markdown", ext: "css"))" />
+<link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "style", ext: "css"))" />
+</head>
+<body class="markdown-body">
+\(HTMLFormatter.format(body))
+\(footer)
+</body>
+\(scrollTo > 0 ? "<script>scrollTo(0,\(scrollTo))</script>" : "")
+</html>
+"""
+	}
+	
+	private func _footer() -> String {
+		let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+		let buildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+		return "<footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>"
 	}
 }

@@ -22,7 +22,7 @@ func bundleFile(filename: String, ext: String) -> URL {
 class WebViewer: NSViewController, WKNavigationDelegate {
 	let web = WKWebView()
 	var url: URL? = nil
-	var html: String? = nil
+	let scapegoat = Bundle.main.url(forResource: "empty", withExtension: "txt")!
 	
 	override func loadView() {
 		self.view = NSView(frame: NSMakeRect(0, 0, 800, 600))
@@ -36,13 +36,29 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 	}
 	
 	func load(fromFile url: URL) throws {
+		self.url = url
+		// allow read access to all files under root "/"
+		web.loadFileURL(scapegoat, allowingReadAccessTo: URL(string: "file:///")!)
+		// loadHTMLString must wait until this request is fully loaded
+		// see delegate method below
+	}
+	
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+		if webView.url == scapegoat {
+			try? reload()
+		}
+	}
+	
+	func reload() throws {
+		guard let url else {
+			return
+		}
 		let md = try Markdown.Document(parsing: url)
 		
 		let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 		let buildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
 		
-		self.url = url
-		self.html = """
+		let html = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,29 +68,13 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 </head>
 <body class="markdown-body">
 \(HTMLFormatter.format(md))
-
-<footer>
-relikd/QLMarkdown v\(ver) (\(buildVer))
-</footer>
+<footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>
 </body>
 </html>
 """
 		// write debug output
 		//try? html!.write(to: URL.UserModDir!.appendingPathComponent("debug.html", isDirectory: false), atomically: true, encoding: .utf8)
-		
-		// allow read access to all files under root "/"
-		let emtpy = Bundle.main.url(forResource: "empty", withExtension: "txt")!
-		web.loadFileURL(emtpy, allowingReadAccessTo: URL(string: "file:///")!)
-		
-		// loadHTMLString must wait until previous request is fully loaded
-		// see delegate method below
-	}
-	
-	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		if webView.url?.lastPathComponent == "empty.txt" {
-			webView.loadHTMLString(html!, baseURL: url)
-			html = nil // free up memory
-		}
+		web.loadHTMLString(html, baseURL: url)
 	}
 	
 	// this should open links in external browser but it doesnt

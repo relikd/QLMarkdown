@@ -64,6 +64,26 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
+                            <menuItem title="Open in App" id="hWW-3S-1G9">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open in App" identifier="open-in-app" id="aHv-lm-gIY">
+                                    <items>
+                                        <menuItem title="Last used" keyEquivalent="e" id="ciA-vX-KSR">
+                                            <connections>
+                                                <action selector="openInEditor:" target="-1" id="1QR-0g-ZK2"/>
+                                                <binding destination="K5g-Af-dVt" name="enabled" keyPath="values.defaultApp" id="TM9-0I-iN6">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                    <connections>
+                                        <outlet property="delegate" destination="Voe-Tx-rLC" id="fPm-fW-B22"/>
+                                    </connections>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
@@ -215,5 +235,6 @@
             </items>
             <point key="canvasLocation" x="200" y="121"/>
         </menu>
+        <userDefaultsController representsSharedInstance="YES" id="K5g-Af-dVt"/>
     </objects>
 </document>

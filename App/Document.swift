@@ -20,7 +20,7 @@ class Document: NSDocument, NSWindowDelegate {
 	
 	override nonisolated func read(from url: URL, ofType typeName: String) throws {
 		try MainActor.assumeIsolated {
-			try web.load(fromFile: url)
+			web.load(fromFile: url) // reloads if url unchanged
 			try watchForChanges(url)
 		}
 	}
@@ -44,6 +44,11 @@ class Document: NSDocument, NSWindowDelegate {
 	
 	// MARK: - File change watcher
 	
+	// Xcode handles file saving differently than most editors.
+	// Instead of writing to the file directly, Xcode creates a new file and hot-swaps it with the current.
+	// This triggers the Document to `read(from:ofType:)` again instead of triggering the file watcher.
+	// Thus, both entry points have to handle reloads.
+	
 	deinit {
 		watcher?.cancel()
 	}
@@ -51,6 +56,8 @@ class Document: NSDocument, NSWindowDelegate {
 	var watcher: DispatchSourceFileSystemObject? = nil
 	
 	func watchForChanges(_ url: URL) throws {
+		// if file is hot-swapped, previous FileHandle must be invalidated
+		watcher?.cancel()
 		let fh = try FileHandle(forReadingFrom: url)
 		watcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: .write, queue: .main)
 		watcher!.setCancelHandler {
@@ -61,7 +68,7 @@ class Document: NSDocument, NSWindowDelegate {
 			let newTs = Date().timeIntervalSince1970
 			if newTs - prevTs > 0.2 {
 				prevTs = newTs
-				self.web.reloadKeepScrollPosition()
+				try? self.web.reload()
 			}
 		}
 		watcher!.activate()
@@ -83,7 +90,7 @@ class Document: NSDocument, NSWindowDelegate {
 	}
 	
 	@IBAction func reloadDocument(_ sender: NSMenuItem) {
-		self.web.reloadKeepScrollPosition()
+		try? self.web.reload()
 	}
 	
 	@IBAction func saveAsHtml(_ sender: NSMenuItem) {

@@ -36,12 +36,16 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		self.view.addSubview(self.web)
 	}
 	
-	func load(fromFile url: URL) throws {
-		self.url = url
-		// allow read access to all files under root "/"
-		web.loadFileURL(scapegoat, allowingReadAccessTo: URL(string: "file:///")!)
-		// loadHTMLString must wait until this request is fully loaded
-		// see delegate method below
+	func load(fromFile url: URL) {
+		if self.url == url {
+			try? reload()
+		} else {
+			self.url = url
+			// allow read access to all files under root "/"
+			web.loadFileURL(scapegoat, allowingReadAccessTo: URL(string: "file:///")!)
+			// loadHTMLString must wait until this request is fully loaded
+			// see delegate method below
+		}
 	}
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -50,19 +54,16 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		}
 	}
 	
-	func reloadKeepScrollPosition() {
-		web.evaluateJavaScript("window.pageYOffset") { pos, _ in
-			try? self.reload(scrollTo: pos as? Int ?? 0)
-		}
-	}
-	
 	/// Read source file and load in web browser
-	func reload(scrollTo: Int = 0) throws {
+	func reload() throws {
 		guard let url else {
 			return
 		}
 		let md = try Markdown.Document(parsing: url)
-		web.loadHTMLString(_html(md, footer: _footer(), scrollTo: scrollTo), baseURL: url)
+		web.evaluateJavaScript("window.pageYOffset") { pos, _ in
+			let html = self._html(md, footer: self._footer(), scrollTo: pos as? Int ?? 0)
+			self.web.loadHTMLString(html, baseURL: url)
+		}
 	}
 	
 	/// Read source file and generate new Markdown html document for export (without footer).

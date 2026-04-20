@@ -104,7 +104,6 @@
 				549688392EE0AFC500FB282A /* README.md */,
 				54C509042EE1DA3400E5C1A3 /* CHANGELOG.md */,
 				546D44A02F964B5700B85121 /* Common */,
-				54C509012EE1C16D00E5C1A3 /* resources */,
 				5496883E2EE0B0B700FB282A /* App */,
 				549688462EE0B0BA00FB282A /* QLPreview */,
 				549688252EE0AD8200FB282A /* Frameworks */,
@@ -132,6 +131,7 @@
 		5496883E2EE0B0B700FB282A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */,
 				5496884A2EE0B12D00FB282A /* Info.plist */,
 				5496883A2EE0B0B700FB282A /* AppDelegate.swift */,
 				5496883D2EE0B0B700FB282A /* MainMenu.xib */,
@@ -147,14 +147,6 @@
 				549688432EE0B0BA00FB282A /* PreviewViewController.swift */,
 			);
 			path = QLPreview;
-			sourceTree = "<group>";
-		};
-		54C509012EE1C16D00E5C1A3 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */,
-			);
-			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

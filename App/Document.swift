@@ -18,10 +18,14 @@ class Document: NSDocument, NSWindowDelegate {
 		persistWindowSize(notification.object as! NSWindow)
 	}
 	
+	var watcher: FileWatcher? = nil // auto-closed on deinit
+	
 	override nonisolated func read(from url: URL, ofType typeName: String) throws {
-		try MainActor.assumeIsolated {
+		MainActor.assumeIsolated {
 			web.load(fromFile: url) // reloads if url unchanged
-			try watchForChanges(url)
+			watcher = try? FileWatcher(url) { [unowned self] in
+				try? self.web.reload()
+			}
 		}
 	}
 	
@@ -40,38 +44,6 @@ class Document: NSDocument, NSWindowDelegate {
 		if w > 0 && h > 0 {
 			win.setFrame(CGRect(origin: win.frame.origin, size: .init(width: w, height: h)), display: true)
 		}
-	}
-	
-	// MARK: - File change watcher
-	
-	// Xcode handles file saving differently than most editors.
-	// Instead of writing to the file directly, Xcode creates a new file and hot-swaps it with the current.
-	// This triggers the Document to `read(from:ofType:)` again instead of triggering the file watcher.
-	// Thus, both entry points have to handle reloads.
-	
-	deinit {
-		watcher?.cancel()
-	}
-	
-	var watcher: DispatchSourceFileSystemObject? = nil
-	
-	func watchForChanges(_ url: URL) throws {
-		// if file is hot-swapped, previous FileHandle must be invalidated
-		watcher?.cancel()
-		let fh = try FileHandle(forReadingFrom: url)
-		watcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: .write, queue: .main)
-		watcher!.setCancelHandler {
-			try? fh.close()
-		}
-		var prevTs = Date().timeIntervalSince1970
-		watcher!.setEventHandler { [unowned self] in
-			let newTs = Date().timeIntervalSince1970
-			if newTs - prevTs > 0.2 {
-				prevTs = newTs
-				try? self.web.reload()
-			}
-		}
-		watcher!.activate()
 	}
 	
 	// MARK: - Main Menu
@@ -105,3 +77,36 @@ class Document: NSDocument, NSWindowDelegate {
 	}
 }
 
+
+// MARK: - File change watcher
+
+// Xcode handles file saving differently than most editors.
+// Instead of writing to the file directly, Xcode creates a new file and hot-swaps it with the current.
+// This triggers the Document to `read(from:ofType:)` again instead of triggering the file watcher.
+// Thus, both entry points have to handle reloads.
+
+struct FileWatcher : ~Copyable {
+	let watcher: DispatchSourceFileSystemObject
+	
+	init(_ url: URL, closure: @escaping () -> Void) throws {
+		// if file is hot-swapped, previous FileHandle must be invalidated
+		let fh = try FileHandle(forReadingFrom: url)
+		watcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: .write, queue: .main)
+		watcher.setCancelHandler {
+			try? fh.close()
+		}
+		var prevTs = Date().timeIntervalSince1970
+		watcher.setEventHandler {
+			let newTs = Date().timeIntervalSince1970
+			if newTs - prevTs > 0.2 {
+				prevTs = newTs
+				closure()
+			}
+		}
+		watcher.activate()
+	}
+	
+	deinit {
+		watcher.cancel()
+	}
+}

@@ -78,6 +78,7 @@
                                                 </binding>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VoT-uG-alE"/>
                                     </items>
                                     <connections>
                                         <outlet property="delegate" destination="Voe-Tx-rLC" id="fPm-fW-B22"/>

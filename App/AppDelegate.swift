@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 			} else {
 				menu.items.first!.title = "Last Used"
 			}
-			if menu.items.count == 1 { // populate once
+			if menu.items.count == 2 { // populate once
 				let me = Bundle.main.bundleURL
 				let apps = appURLs().filter { $0 != me }//.sorted { $0.lastPathComponent < $1.lastPathComponent }
 				for appUrl in apps {

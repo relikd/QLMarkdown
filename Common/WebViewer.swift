@@ -32,6 +32,7 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		self.web.frame = self.view.bounds
 		self.web.autoresizingMask = [.width, .height]
 		self.web.navigationDelegate = self
+		self.web.allowsBackForwardNavigationGestures = true
 		self.view.addSubview(self.web)
 	}
 	
@@ -49,7 +50,13 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		}
 	}
 	
-	func reload() throws {
+	func reloadKeepScrollPosition() {
+		web.evaluateJavaScript("window.pageYOffset") { pos, _ in
+			try? self.reload(scrollTo: pos as? Int ?? 0)
+		}
+	}
+	
+	func reload(scrollTo: Int = 0) throws {
 		guard let url else {
 			return
 		}
@@ -70,6 +77,7 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 \(HTMLFormatter.format(md))
 <footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>
 </body>
+<script>scrollTo(0,\(scrollTo))</script>
 </html>
 """
 		// write debug output

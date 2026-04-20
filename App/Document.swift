@@ -21,6 +21,7 @@ class Document: NSDocument, NSWindowDelegate {
 	override nonisolated func read(from url: URL, ofType typeName: String) throws {
 		try MainActor.assumeIsolated {
 			try web.load(fromFile: url)
+			try watchForChanges(url)
 		}
 	}
 	
@@ -39,6 +40,31 @@ class Document: NSDocument, NSWindowDelegate {
 		if w > 0 && h > 0 {
 			win.setFrame(CGRect(origin: win.frame.origin, size: .init(width: w, height: h)), display: true)
 		}
+	}
+	
+	// MARK: - File change watcher
+	
+	deinit {
+		watcher?.cancel()
+	}
+	
+	var watcher: DispatchSourceFileSystemObject? = nil
+	
+	func watchForChanges(_ url: URL) throws {
+		let fh = try FileHandle(forReadingFrom: url)
+		watcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: .write, queue: .main)
+		watcher!.setCancelHandler {
+			try? fh.close()
+		}
+		var prevTs = Date().timeIntervalSince1970
+		watcher!.setEventHandler { [unowned self] in
+			let newTs = Date().timeIntervalSince1970
+			if newTs - prevTs > 0.2 {
+				prevTs = newTs
+				self.web.reloadKeepScrollPosition()
+			}
+		}
+		watcher!.activate()
 	}
 }
 

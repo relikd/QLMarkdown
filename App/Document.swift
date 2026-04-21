@@ -18,14 +18,9 @@ class Document: NSDocument, NSWindowDelegate {
 		persistWindowSize(notification.object as! NSWindow)
 	}
 	
-	var watcher: FileWatcher? = nil // auto-closed on deinit
-	
 	override nonisolated func read(from url: URL, ofType typeName: String) throws {
 		MainActor.assumeIsolated {
-			web.load(fromFile: url) // reloads if url unchanged
-			watcher = try? FileWatcher(url) { [unowned self] in
-				try? self.web.reload()
-			}
+			_reload(url)
 		}
 	}
 	
@@ -62,7 +57,9 @@ class Document: NSDocument, NSWindowDelegate {
 	}
 	
 	@IBAction func reloadDocument(_ sender: NSMenuItem) {
-		try? self.web.reload()
+		if let url = self.fileURL ?? web.url {
+			_reload(url)
+		}
 	}
 	
 	@IBAction func saveAsHtml(_ sender: NSMenuItem) {
@@ -75,38 +72,78 @@ class Document: NSDocument, NSWindowDelegate {
 		}
 		try? web.rawHtml().write(to: url, atomically: true, encoding: .utf8)
 	}
+	
+	// MARK: - File change watcher
+	
+	var watcher: FileWatcher? = nil // auto-closed on deinit
+	
+	private func _reload(_ url: URL) {
+		web.load(fromFile: url) // if url unchanged, only reload
+		watcher = try? FileWatcher(url) { [unowned self] in
+			try? self.web.reload()
+		}
+	}
 }
 
 
-// MARK: - File change watcher
-
-// Xcode handles file saving differently than most editors.
-// Instead of writing to the file directly, Xcode creates a new file and hot-swaps it with the current.
-// This triggers the Document to `read(from:ofType:)` again instead of triggering the file watcher.
-// Thus, both entry points have to handle reloads.
-
-struct FileWatcher : ~Copyable {
-	let watcher: DispatchSourceFileSystemObject
+/// - Most editors will trigger the `.write` event.
+/// - VIM triggers the `.rename` event and replaces the old file with a new one -> thus the need for `rebuild()`.
+/// - Xcode triggers the `.delete` event and calls `Document.read()` again (which creates a new watcher).
+class FileWatcher {
+	private let url: URL
+	private let closure: () -> Void
+	private var watcher: DispatchSourceFileSystemObject
+	private var prevTs = Date().timeIntervalSince1970
+	private var errCount = 0
 	
 	init(_ url: URL, closure: @escaping () -> Void) throws {
-		// if file is hot-swapped, previous FileHandle must be invalidated
-		let fh = try FileHandle(forReadingFrom: url)
-		watcher = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: .write, queue: .main)
-		watcher.setCancelHandler {
-			try? fh.close()
-		}
-		var prevTs = Date().timeIntervalSince1970
-		watcher.setEventHandler {
-			let newTs = Date().timeIntervalSince1970
-			if newTs - prevTs > 0.2 {
-				prevTs = newTs
-				closure()
-			}
-		}
-		watcher.activate()
+		self.url = url
+		self.closure = closure
+		self.watcher = try Self.makeHandler(url)
+		self.watcher.setEventHandler(handler: self.onTrigger)
 	}
 	
 	deinit {
 		watcher.cancel()
+	}
+	
+	static func makeHandler(_ url: URL) throws -> DispatchSourceFileSystemObject {
+		let fh = try FileHandle(forReadingFrom: url)
+		let handler = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fh.fileDescriptor, eventMask: [.write, .rename, .delete], queue: .main)
+		handler.setCancelHandler { try? fh.close() }
+		handler.activate()
+		return handler
+	}
+	
+	private func rebuild() {
+		do {
+			watcher = try Self.makeHandler(url)
+			watcher.setEventHandler(handler: self.onTrigger)
+			errCount = 0
+			self.closure()
+		} catch {
+			errCount += 1
+			if errCount > 20 {
+				return
+			}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+				self.rebuild()
+			}
+		}
+	}
+	
+	private func onTrigger() {
+		if watcher.data.contains(.rename) {
+			watcher.cancel()
+			rebuild()
+		} else if watcher.data.contains(.delete) {
+			watcher.cancel()
+		} else {
+			let newTs = Date().timeIntervalSince1970
+			if newTs - prevTs > 0.2 {
+				prevTs = newTs
+				self.closure()
+			}
+		}
 	}
 }

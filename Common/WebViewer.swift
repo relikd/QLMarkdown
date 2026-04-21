@@ -110,3 +110,5 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		return "<footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>"
 	}
 }
+
+// TODO: implement custom html walker to fix: links in heading, heading ids, checkmark lists

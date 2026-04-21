@@ -64,6 +64,35 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
+                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                                <connections>
+                                    <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Recent" id="tXI-mr-wws">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
+                                    <items>
+                                        <menuItem title="Clear Menu" id="vNY-rz-j42">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="clearRecentDocuments:" target="-1" id="Daa-9d-B3U"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="78g-MU-JT9"/>
+                            <menuItem title="Reload Document" keyEquivalent="r" id="cZ7-DT-lmM">
+                                <connections>
+                                    <action selector="reloadDocument:" target="-1" id="175-yW-ivx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save as HTML" keyEquivalent="s" id="mSU-bA-YDE">
+                                <connections>
+                                    <action selector="saveAsHtml:" target="-1" id="YpZ-6h-unZ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open in App" id="hWW-3S-1G9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Open in App" identifier="open-in-app" id="aHv-lm-gIY">
@@ -84,34 +113,6 @@
                                         <outlet property="delegate" destination="Voe-Tx-rLC" id="fPm-fW-B22"/>
                                     </connections>
                                 </menu>
-                            </menuItem>
-                            <menuItem title="Reload Document" keyEquivalent="r" id="cZ7-DT-lmM">
-                                <connections>
-                                    <action selector="reloadDocument:" target="-1" id="175-yW-ivx"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
-                                <connections>
-                                    <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Open Recent" id="tXI-mr-wws">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
-                                    <items>
-                                        <menuItem title="Clear Menu" id="vNY-rz-j42">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="clearRecentDocuments:" target="-1" id="Daa-9d-B3U"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Save as HTML" keyEquivalent="s" id="mSU-bA-YDE">
-                                <connections>
-                                    <action selector="saveAsHtml:" target="-1" id="YpZ-6h-unZ"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">

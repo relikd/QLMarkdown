@@ -10,11 +10,11 @@ QLMarkdown
 
 QuickLook plugin for Markdown files.
 
+![screenshot](resources/screenshot.jpg)
+
 Stupidly simple.
 No configuration options, just Github flavored Markdown.
 But if you insist on modifying the stylesheet, you have full control over that.
-
-![screenshot](screenshot.jpg)
 
 
 Installation
@@ -33,18 +33,25 @@ or download from [releases](https://github.com/relikd/QLMarkdown/releases/latest
 Features
 --------
 
-- Small app size (3.5 MB)
-- Easy to review (80 lines of code)
+- Small app size (6 MB)
 - Dark Mode
+- Auto-reload on file change (in App)
 - Customizable html output
+
+![auto-reload on file change](resources/auto-reload.gif)
+
 
 ### How to customize CSS
 
 1. Right click on the app and select "Show Package Contents"
-2. Go to `PlugIns` and repeat "Show Package Contents" on the Preview extension.
-3. Copy `Contents/Resources/style.css` (or `markdown.css`)
-4. Open `~/Library/Containers/de.relikd.QLMarkdown.Preview/Data/Documents/`
-5. Paste the previous file and modify it to your liking
+2. Open `Contents/Resources` and copy `style.css` (or `markdown.css`)
+3. Open `~/Library/Containers/de.relikd.QLMarkdown.Preview/Data/Documents/`
+4. Paste the previous file(s) and modify it to your liking (e.g. change text colors)
+
+To modify the app preview, the procedure is mostly the same, except in step 3 the path is:
+```
+~/Library/Containers/de.relikd.QLMarkdown/Data/Documents/
+```
 
 
 Scope of this project

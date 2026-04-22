@@ -105,6 +105,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		546D44CB2F994B5800B85121 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		549688042EE0AB2C00FB282A = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +123,7 @@
 				546D44A02F964B5700B85121 /* Common */,
 				5496883E2EE0B0B700FB282A /* App */,
 				549688462EE0B0BA00FB282A /* QLPreview */,
+				546D44CB2F994B5800B85121 /* resources */,
 				549688252EE0AD8200FB282A /* Frameworks */,
 				5496880E2EE0AB2C00FB282A /* Products */,
 			);
@@ -140,7 +149,6 @@
 		5496883E2EE0B0B700FB282A /* App */ = {
 			isa = PBXGroup;
 			children = (
-				54C508FE2EE1C16D00E5C1A3 /* AppIcon.icns */,
 				5496884A2EE0B12D00FB282A /* Info.plist */,
 				546D44B72F96520200B85121 /* Document.swift */,
 				5496883A2EE0B0B700FB282A /* AppDelegate.swift */,
@@ -346,6 +354,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UY657LKNHJ;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -410,6 +419,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UY657LKNHJ;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -435,7 +445,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Common/Shared.entitlements;
-				DEAD_CODE_STRIPPING = YES;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -463,7 +472,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Common/Shared.entitlements;
-				DEAD_CODE_STRIPPING = YES;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;

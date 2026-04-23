@@ -1,5 +1,5 @@
 import WebKit
-import Markdown // Document, HTMLFormatter
+import Markdown // Document
 //import os // OSLog
 //
 //private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "preview-plugin")
@@ -96,7 +96,7 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 <link rel="stylesheet" type="text/css" href="\(bundleFile(filename: "style", ext: "css"))" />
 </head>
 <body class="markdown-body">
-\(HTMLFormatter.format(body))
+\(HTML.from(body))
 \(footer)
 </body>
 \(scrollTo > 0 ? "<script>scrollTo(0,\(scrollTo))</script>" : "")
@@ -110,5 +110,3 @@ class WebViewer: NSViewController, WKNavigationDelegate {
 		return "<footer>relikd/QLMarkdown v\(ver) (\(buildVer))</footer>"
 	}
 }
-
-// TODO: implement custom html walker to fix: links in heading, heading ids, checkmark lists

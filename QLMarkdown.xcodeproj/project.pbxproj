@@ -14,6 +14,8 @@
 		546D44B92F96524F00B85121 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 5496C6CC2EE1FE6E00EE9345 /* style.css */; };
 		546D44BA2F96524F00B85121 /* empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 54C508DA2EE0ED4200E5C1A3 /* empty.txt */; };
 		546D44BB2F96524F00B85121 /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = 54AD6C9C2EE0C2B1006CCA14 /* markdown.css */; };
+		546D44D12F994CDF00B85121 /* HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D44D02F994CDF00B85121 /* HTML.swift */; };
+		546D44D22F994CDF00B85121 /* HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D44D02F994CDF00B85121 /* HTML.swift */; };
 		549688272EE0AD8200FB282A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549688262EE0AD8200FB282A /* Quartz.framework */; };
 		549688332EE0AD8200FB282A /* QLMarkdown Preview Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 549688242EE0AD8200FB282A /* QLMarkdown Preview Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		549688402EE0B0B700FB282A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5496883D2EE0B0B700FB282A /* MainMenu.xib */; };
@@ -53,6 +55,7 @@
 /* Begin PBXFileReference section */
 		546D449F2F964B5700B85121 /* WebViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewer.swift; sourceTree = "<group>"; };
 		546D44B72F96520200B85121 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		546D44D02F994CDF00B85121 /* HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTML.swift; sourceTree = "<group>"; };
 		5496880D2EE0AB2C00FB282A /* QLMarkdown (debug).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QLMarkdown (debug).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5496881C2EE0AB4E00FB282A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5496881D2EE0AB4E00FB282A /* Config-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				5496C6CC2EE1FE6E00EE9345 /* style.css */,
 				54C508DA2EE0ED4200E5C1A3 /* empty.txt */,
 				546D449F2F964B5700B85121 /* WebViewer.swift */,
+				546D44D02F994CDF00B85121 /* HTML.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -285,6 +289,7 @@
 				546D44B62F9651D300B85121 /* WebViewer.swift in Sources */,
 				549688412EE0B0B700FB282A /* AppDelegate.swift in Sources */,
 				546D44B82F96520200B85121 /* Document.swift in Sources */,
+				546D44D22F994CDF00B85121 /* HTML.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				546D44A62F964B6B00B85121 /* WebViewer.swift in Sources */,
+				546D44D12F994CDF00B85121 /* HTML.swift in Sources */,
 				549688492EE0B0BA00FB282A /* PreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

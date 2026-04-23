@@ -1,8 +1,6 @@
 import Foundation
 import Markdown
 
-// TODO: implement custom html walker to fix: checkmark lists
-
 public struct HTML: MarkupWalker {
 	/// The resulting HTML built up after printing.
 	public private(set) var result = ""
@@ -58,13 +56,15 @@ public struct HTML: MarkupWalker {
 	}
 	
 	public mutating func visitListItem(_ listItem: ListItem) -> () {
-		result += "<li>"
 		if let checkbox = listItem.checkbox {
-			result += "<input type=\"checkbox\" disabled=\"\""
+			result += "<li class=\"task-list-item\">"
+			result += "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"\""
 			if checkbox == .checked {
 				result += " checked=\"\""
 			}
 			result += " /> "
+		} else {
+			result += "<li>"
 		}
 		descendInto(listItem)
 		result += "</li>\n"
@@ -84,9 +84,10 @@ public struct HTML: MarkupWalker {
 	}
 	
 	public mutating func visitParagraph(_ paragraph: Paragraph) -> () {
-		result += "<p>"
+		let wrap = !(paragraph.parent is ListItem)
+		if wrap { result += "<p>" }
 		descendInto(paragraph)
-		result += "</p>\n"
+		if wrap { result += "</p>\n" }
 	}
 	
 	public mutating func visitTable(_ table: Table) -> () {

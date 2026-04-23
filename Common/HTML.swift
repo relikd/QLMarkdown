@@ -1,7 +1,7 @@
 import Foundation
 import Markdown
 
-// TODO: implement custom html walker to fix: heading ids, checkmark lists
+// TODO: implement custom html walker to fix: checkmark lists
 
 public struct HTML: MarkupWalker {
 	/// The resulting HTML built up after printing.
@@ -10,6 +10,7 @@ public struct HTML: MarkupWalker {
 	private var inTableHead = false
 	private var tableColumnAlignments: [Table.ColumnAlignment?]? = nil
 	private var currentTableColumn = 0
+	private var slugger = GithubSlugger()
 	
 	/// Format HTML for the given markup tree.
 	public static func from(_ markup: Markup) -> String {
@@ -35,9 +36,15 @@ public struct HTML: MarkupWalker {
 		}
 		result += "<pre><code\(lang)>\(codeBlock.code)</code></pre>\n"
 	}
+		
+	private var anchor_icon: String {
+		"<span aria-hidden=\"true\" class=\"octicon octicon-link\"></span>"
+	}
 	
 	public mutating func visitHeading(_ heading: Heading) -> () {
+		let slug = slugger.slugify(heading.plainText)
 		result += "<h\(heading.level)>"
+		result += "<a id=\"\(slug)\" class=\"anchor\" href=\"#\(slug)\" aria-hidden=\"true\">\(anchor_icon)</a>\n"
 		descendInto(heading)
 		result += "</h\(heading.level)>\n"
 	}

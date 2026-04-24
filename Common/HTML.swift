@@ -42,7 +42,7 @@ public struct HTML: MarkupWalker {
 		let alertTag = blockQuote.child(at: 0)?.child(at: 0) as? Text
 		if let alert = AlertStyle(rawValue: alertTag?.string) {
 			result += "<div class=\"markdown-alert markdown-alert-\(alert.dataTag)\">\n"
-			result += "<p class=\"markdown-alert-title mr-2\">\(alert.dataTag.capitalized)</p>\n"
+			result += "<p class=\"markdown-alert-title\">\(alert.dataTag.capitalized)</p>\n"
 			removeFirstText = true
 			descendInto(blockQuote)
 			removeFirstText = false

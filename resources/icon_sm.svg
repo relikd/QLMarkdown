@@ -1,0 +1,14 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<g font-family="Courier New" font-weight="bold">
+<rect id="bg" fill="#ddd" height="1024" rx="200" width="1024"/>
+<text id="ext" font-size="400" x="270" y="950">
+  <tspan x="270" y="950">md</tspan>
+</text>
+<text id="json" fill="#666" x="90" y="290" font-size="200">
+  <tspan x="90" y="290"># Title</tspan>
+  <tspan x="90" y="490">## ToDo</tspan>
+</text>
+<path id="handle" fill="#215c2e" d="m850 770c-8 6-19 5-25-2l-125-169 45-40 152 146c7 7 7 18 0 25z"/>
+<circle id="loupe" stroke="#215c2e" cx="500" cy="355" fill="none" r="300" stroke-width="50"/>
+</g>
+</svg>

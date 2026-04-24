@@ -1,0 +1,17 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<g font-family="Courier New" font-weight="bold" transform="translate(96,96) scale(0.8125)">
+<rect id="bg" fill="#ddd" height="1024" rx="200" width="1024"/>
+<text id="ext" font-size="300" x="330" y="940">
+<tspan x="330" y="940">md</tspan>
+</text>
+<text fill="#666" font-size="110" x="170" y="180">
+<tspan x="170" y="180"># Title</tspan>
+<tspan x="170" y="310">## ToDo</tspan>
+<tspan x="170" y="440">-Markdown</tspan>
+<tspan x="170" y="570">-Quicklook</tspan>
+<tspan x="170" y="710">-Preview</tspan>
+</text>
+<circle id="loupe" stroke="#215c2e" cx="490" cy="400" fill="none" r="320" stroke-width="50"/>
+<path id="handle" fill="#215c2e" d="m860 870c-9 8-22 6-29-3l-148-199 53-47 179 172c8 8 8 22-1 29z"/>
+</g>
+</svg>

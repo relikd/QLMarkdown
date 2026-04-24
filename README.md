@@ -2,7 +2,7 @@
 [![Current release](https://img.shields.io/github/release/relikd/QLMarkdown)](https://github.com/relikd/QLMarkdown/releases/latest)
 [![All downloads](https://img.shields.io/github/downloads/relikd/QLMarkdown/total)](https://github.com/relikd/QLMarkdown/releases)
 
-<img src="resources/AppIcon.svg" width="180" height="180">
+<img src="resources/icon.svg" width="180" height="180">
 
 
 QLMarkdown

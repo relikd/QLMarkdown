@@ -1,6 +1,24 @@
 import Foundation
 import Markdown
 
+enum AlertStyle: String {
+	case note = "[!note]"
+	case tip = "[!tip]"
+	case important = "[!important]"
+	case warning = "[!warning]"
+	case caution = "[!caution]"
+	
+	init?(rawValue: String?) {
+		self.init(rawValue: rawValue?.lowercased() ?? "")
+	}
+	
+	var dataTag: String {
+		rawValue.trimmingCharacters(in: .punctuationCharacters)
+	}
+}
+
+// MARK: - HTML Formatter
+
 public struct HTML: MarkupWalker {
 	/// The resulting HTML built up after printing.
 	public private(set) var result = ""
@@ -8,6 +26,7 @@ public struct HTML: MarkupWalker {
 	private var inTableHead = false
 	private var tableColumnAlignments: [Table.ColumnAlignment?]? = nil
 	private var currentTableColumn = 0
+	private var removeFirstText = false
 	private var slugger = GithubSlugger()
 	
 	/// Format HTML for the given markup tree.
@@ -20,9 +39,19 @@ public struct HTML: MarkupWalker {
 	// MARK: Block elements
 	
 	public mutating func visitBlockQuote(_ blockQuote: BlockQuote) -> () {
-		result += "<blockquote>\n"
-		descendInto(blockQuote)
-		result += "</blockquote>\n"
+		let alertTag = blockQuote.child(at: 0)?.child(at: 0) as? Text
+		if let alert = AlertStyle(rawValue: alertTag?.string) {
+			result += "<div class=\"markdown-alert markdown-alert-\(alert.dataTag)\">\n"
+			result += "<p class=\"markdown-alert-title mr-2\">\(alert.dataTag.capitalized)</p>\n"
+			removeFirstText = true
+			descendInto(blockQuote)
+			removeFirstText = false
+			result += "</div>\n"
+		} else {
+			result += "<blockquote>\n"
+			descendInto(blockQuote)
+			result += "</blockquote>\n"
+		}
 	}
 	
 	public mutating func visitCodeBlock(_ codeBlock: CodeBlock) -> () {
@@ -199,6 +228,10 @@ public struct HTML: MarkupWalker {
 	}
 	
 	public mutating func visitText(_ text: Text) -> () {
+		if removeFirstText {
+			removeFirstText = false
+			return
+		}
 		result += text.string
 	}
 	

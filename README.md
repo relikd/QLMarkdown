@@ -10,11 +10,11 @@ QLMarkdown
 
 QuickLook plugin for Markdown files.
 
-![screenshot](resources/screenshot.jpg)
-
 Stupidly simple.
 No configuration options, just Github flavored Markdown.
 But if you insist on modifying the stylesheet, you have full control over that.
+
+![screenshot](resources/screenshot.jpg)
 
 
 Installation

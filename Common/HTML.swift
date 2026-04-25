@@ -232,7 +232,7 @@ public struct HTML: MarkupWalker {
 			removeFirstText = false
 			return
 		}
-		result += text.string
+		result += text.string.htmlEscaped
 	}
 	
 	public mutating func visitStrikethrough(_ strikethrough: Strikethrough) -> () {
@@ -249,5 +249,15 @@ public struct HTML: MarkupWalker {
 		result += "<span data-attributes=\"\(attributes.attributes.replacingOccurrences(of: "\"", with: "\\\""))\">"
 		descendInto(attributes)
 		result += "</span>"
+	}
+}
+
+extension String {
+	var htmlEscaped: String {
+		self.replacingOccurrences(of: "&", with: "&amp;")
+		.replacingOccurrences(of: "<", with: "&lt;")
+		.replacingOccurrences(of: ">", with: "&gt;")
+		.replacingOccurrences(of: "\"", with: "&quot;")
+		.replacingOccurrences(of: "'", with: "&#39;")
 	}
 }

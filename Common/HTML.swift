@@ -61,7 +61,7 @@ public struct HTML: MarkupWalker {
 		} else {
 			lang = ""
 		}
-		result += "<pre><code\(lang)>\(codeBlock.code)</code></pre>\n"
+		result += "<pre><code\(lang)>\(codeBlock.code.htmlEscaped)</code></pre>\n"
 	}
 		
 	private var anchor_icon: String {

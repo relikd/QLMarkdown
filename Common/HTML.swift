@@ -202,7 +202,7 @@ public struct HTML: MarkupWalker {
 		if let title = image.title, !title.isEmpty {
 			result += " title=\"\(title)\""
 		}
-		result += " />"
+		result += " alt=\"\(image.plainText)\"/>"
 	}
 	
 	public mutating func visitInlineHTML(_ inlineHTML: InlineHTML) -> () {

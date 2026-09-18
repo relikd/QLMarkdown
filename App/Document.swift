@@ -104,7 +104,7 @@ class FileWatcher {
 		self.url = url
 		self.closure = closure
 		self.watcher = try Self.makeHandler(url)
-		self.watcher.setEventHandler(handler: self.onTrigger)
+		self.watcher.setEventHandler { [unowned self] in onTrigger() }
 	}
 	
 	deinit {
@@ -122,7 +122,7 @@ class FileWatcher {
 	private func rebuild() {
 		do {
 			watcher = try Self.makeHandler(url)
-			watcher.setEventHandler(handler: self.onTrigger)
+			watcher.setEventHandler { [unowned self] in onTrigger() }
 			errCount = 0
 			self.closure()
 		} catch {

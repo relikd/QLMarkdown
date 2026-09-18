@@ -62,6 +62,7 @@ Added:
 Initial release
 
 
+[1.1.3]: https://github.com/relikd/QLMarkdown/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/relikd/QLMarkdown/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/relikd/QLMarkdown/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/relikd/QLMarkdown/compare/v1.0.0...v1.1.0
